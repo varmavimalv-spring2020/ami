@@ -6,11 +6,11 @@ jobs:
     steps:
       - checkout
       - run: 
-          name: Validate Packer
+          name: Validate Packer JSON
           command: packer validate packer.json
       - run:
           name: Build Packer
-          command: packer build -var-file=vars.json packer.json
+          command: packer build packer.json
 
 workflows:
   version: 2
