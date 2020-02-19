@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: hashicorp/packer:1.1.1
+    steps:
+      - checkout
+      - run: 
+          name: Validate Packer
+          command: packer validate packer.json
+      - run:
+          name: Build Packer
+          command: packer build -var-file=vars.json packer.json
+
+workflows:
+  version: 2
+
+  packer_buid:
+    jobs:
+      - build
