@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install AWS CLI
+          name: Install AWS-CLI
           command: |
             apt-get install unzip
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
