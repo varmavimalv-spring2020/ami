@@ -1,19 +1,17 @@
-version: 2
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.20
 jobs:
   build:
     docker:
+      - image: circleci/python:2.7-stretch
       - image: hashicorp/packer:1.1.1
     steps:
       - checkout
+      - aws-cli/setup:
+          profile-name: circleci
       - run:
-          name: Install AWS CLI
-          command: |
-            sed -i '/jessie-backports/d' /etc/apt/sources.list
-            sed -i '/jessie-updates/d' /etc/apt/sources.list
-            apt-get install unzip
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            ./aws/install
+          aws configure list
       - run: 
           name: Validate Packer JSON
           command: packer validate packer.json
