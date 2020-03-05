@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2020.01
-      - image: hashicorp/packer:1.1.1
     steps:
       - checkout
       - run:
@@ -16,9 +15,14 @@ jobs:
       - run:
           name: AWS configure
           command: |
-            aws configure --profile circleci
             aws configure list
       - run: 
+          name: Install Packer
+          command: |
+            wget https://releases.hashicorp.com/packer/1.5.4/packer_1.5.4_linux_amd64.zip
+            unzip packer_1.5.4_linux_amd64.zip
+            sudo mv packer /usr/local/bin
+      - run:
           name: Validate Packer JSON
           command: packer validate packer.json
       - run:
