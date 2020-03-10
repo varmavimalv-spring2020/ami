@@ -17,4 +17,4 @@ sudo ./install auto
 sudo service codedeploy-agent status
 sudo service codedeploy-agent start
 sudo service codedeploy-agent status
-echo "WORKS"
+echo "AMI with code deploy installed"
