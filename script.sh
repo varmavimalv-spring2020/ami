@@ -20,18 +20,17 @@ sudo service codedeploy-agent status
 echo "AMI with code deploy installed"
 sudo wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
 sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
-echo "
-#!/bin/bash
-
+echo '#!/bin/bash
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
     -a fetch-config \
     -m ec2 \
     -c file:/opt/cloudwatch-config.json \
     -s
-" > cloudwatch_start.sh
+' > cloudwatch_start.sh
 chmod 777 cloudwatch_start.sh
-echo "
-[Service]
+echo '[Service]
 ExecStart=/home/ubuntu/cloudwatch_start.sh
-" > cloudwatch_start.service
+' > cloudwatch_start.service
 sudo mv cloudwatch_start.service /etc/systemd/system/cloudwatch_start.service
+sudo systemctl start cloudwatch_start.service
+sudo systemctl enable cloudwatch_start.service
