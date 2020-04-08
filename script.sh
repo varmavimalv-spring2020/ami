@@ -12,6 +12,7 @@ sudo apt-get install ruby -y
 sudo apt-get install wget -y
 cd /home/$USER
 sudo wget https://aws-codedeploy-$AWS_REGION.s3.$AWS_REGION.amazonaws.com/latest/install
+sudo wget https://s3.amazonaws.com/rds-downloads/rds-ca-2019-root.pem
 sudo chmod +x ./install
 sudo ./install auto
 sudo service codedeploy-agent status
